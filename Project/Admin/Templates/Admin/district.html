@@ -1,0 +1,91 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .tble {
+        color: rgb(255, 255, 255);
+        font-weight: bolder;
+        font-size: 18px;
+        background-color: rgb(6, 4, 78);
+        border-collapse: collapse;
+       
+    }
+    .tble1 {
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 16px;
+        border-collapse: collapse;
+    }
+    td, th {
+            height: 50px;
+            width: 100px;
+
+            }
+    tr:nth-child(even):not(:first-child) {
+                background-color: #cadfef;
+                }
+
+    tr:nth-child(odd):not(:first-child) {
+                background-color: #a4cef0;
+                }
+    
+</style>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="4" align="center"cellpadding=15px>
+            <tr class="tble" >
+                <td>State</td>
+                <td>
+                    <select name="statedrop" required="">
+                       <option value="">-SELECT-</option>
+                       {% for i in state %}
+                       <option value="{{i.id}}">{{i}}</option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><input type="text" name="txtdist" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btn1" value=" SAVE ">
+                    <input type="reset" value=" CLEAR ">
+                </td>
+            </tr>
+        </table>
+
+
+        <br>
+
+
+        <table  align="center" width="60%">
+            <tr align="center" class="tble">
+                <th> DT.NO </th>
+                <th> District </th>
+                <th> State </th>
+                <th> Action </th>
+            </tr>
+            {% for i in dist %}
+            <tr  align="center" class="tble1">
+                <td>{{forloop.counter}}</td>
+                <td>{{i}}</td>
+                <td>{{i.state}}</td>
+                <td><a href="{% url 'projectadmin:deldistrict' i.id %}"> Delete </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

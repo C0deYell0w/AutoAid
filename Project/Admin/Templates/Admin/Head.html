@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AutoAid Admin</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'Admin/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'Admin/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'Admin/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'Admin/images/favicon.png' %}" />
+</head>
+<body>
+  <!-- dashboard -->
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item sidebar-category">
+          <p>PAGES</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'projectadmin:adminhome' %}">
+            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+            <span class="menu-title">HOME</span>
+          </a>
+        </li>
+        
+        <li class="nav-item sidebar-category">
+          <p>CUSTOMERS</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'projectadmin:complaints' %}">
+            <i class="mdi mdi-view-quilt menu-icon"></i>
+            <span class="menu-title">Reg Complaints</span>
+            <div class="badge badge-info badge-pill">2</div>
+          </a>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p>COMPONENTS</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false" aria-controls="ui-basic">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">Manage Locations</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-basics">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:state' %}">STATE</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:district' %}">DISTRICT</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:place' %}">PLACE</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:localplace' %}">LOCAL-PLACE</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">Manage Vehicles</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:vehicletype' %}">VEHICLE TYPE</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:brand' %}">MANUFACTURERS</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p> MARKET PLACE</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">Reg - Requests</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:mechverification' %}"> Mechanics </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:mfbverification' %}"> Fuel Bunks </a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#approved" aria-expanded="false" aria-controls="auth">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">Approved - Partners</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="approved">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:aceptedrequests' %}"> Mechanics </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:aceptedmfbrequests' %}"> Fuel Bunks </a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#rejected" aria-expanded="false" aria-controls="auth">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">Rejected - Personals</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="rejected">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:rejectedrequests' %}"> Mechanics </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:rejectedmfbrequests' %}"> Fuel Bunks </a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p> PAYMENT REPORT </p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#reportingg" aria-expanded="false" aria-controls="auth">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title"> View Reporting</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="reportingg">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:mechpaymentreport' %}"> Mechanics </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'projectadmin:paymentreportmfb' %}"> Fuel Bunks </a></li>
+            </ul>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="navbar-brand-wrapper">
+            &nbsp;&nbsp;
+          </div>
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome Back {{admn.admn_name}}</h4>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item">
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block"></h4>
+            </li>
+            <li class="nav-item dropdown mr-1">
+              <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" href="{% url 'projectadmin:viewfeedback' %}">
+                <i class="mdi mdi-calendar mx-0"></i>
+                <span class="count bg-info">1</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown mr-2">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"  href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail&service=mail&hd=<gmail.com>&flowName=GlifWebSignIn&flowEntry=ServiceLogin" class="nav-item nav-link active" >
+                <i class="mdi mdi-email-open mx-0"></i>
+                <span class="count bg-danger">5</span>
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+        <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+          <ul class="navbar-nav mr-lg-2">
+            <li class="nav-item nav-search d-none d-lg-block">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="" aria-label="search" aria-describedby="search">
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                <img src="{% static 'Admin/images/AutoAid.jpg' %}" alt="profile"/>
+                <span class="nav-profile-name">Anarkh</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="{% url 'projectadmin:logout' %}">
+                  <i class="mdi mdi-logout text-primary"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="" target="_blank"class="nav-link icon-link">
+                <i class="mdi mdi-plus-circle-outline"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://google.com" class="nav-link icon-link">
+                <i class="mdi mdi-web"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link  icon-link" href="#"  id="timeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-clock-outline"></i>
+                <span id="currentTime"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+
+            {% block content %}
+
+
+            {% endblock content %}
+
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+        <footer class="footer">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Distributed By: <a href="https://www.themewagon.com/" target="_blank">ThemeWagon</a></span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'Admin/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'Admin/vendors/chart.js/Chart.min.js' %}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'Admin/js/off-canvas.js' %}"></script>
+  <script src="{% static 'Admin/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'Admin/js/template.js' %}"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'Admin/js/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
+<script>
+
+  // Get the current time and format it as HH:MM:SS AM/PM
+  function getCurrentTime() {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    let currentTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    return currentTime;
+  }
+
+  // Update the current time every second
+  setInterval(function() {
+    document.getElementById('currentTime').innerHTML = getCurrentTime();
+  }, 1000);
+</script>

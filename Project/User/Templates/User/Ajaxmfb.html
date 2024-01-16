@@ -1,0 +1,23 @@
+<table align="center" cellpadding="50" style="border-collapse: collapse">
+    <tr>
+        {% for i in data %}
+
+        <td>
+            <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+                {% load static %}
+                <p><img src="{% static 'SearchImage/Fuel3.jpg' %}" width="100px" height="100px" style="border-radius: 50px;"></p>
+                <p>{{i.mfb_name}}</p>
+                <p>{{i.mfb_contact}}</p>
+                <p>{{i.mfb_email}}</p>
+                <p>{{i.mfb_address}}</p>
+                <a href="{% url 'User:mfbscheduling' i.id %}" class="button button2 button1">Select-Fuel Bunk</a>
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}
+    </tr>
+    <tr>
+        {% endif %}
+
+
+        {% endfor %}
+</table>

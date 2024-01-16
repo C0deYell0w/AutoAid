@@ -1,0 +1,157 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .home {
+                background-color: #4CAF50; 
+                border: none;
+                color: white;
+                text-align: center;
+                border-radius: 10px;
+                width: 250px;
+                height: 40px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                transition-duration: 0.4s;
+                margin-bottom:10px;
+            }
+        .home1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #22932f;
+            }
+        .home1:hover {
+                        background-color: #4CAF50;
+                        color: white;
+                    }
+        .home2:hover {
+                        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+                    }
+
+        .home4:hover {
+                        transition-duration: 0.4s;
+                        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+                }
+        .button {
+                    background-color: #4CAF50; 
+                    border: none;
+                    color: white;
+                    text-align: center;
+                    border-radius: 10px;
+                    width: 140px;
+                    height: 35px;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    margin: 2px 2px;
+                    cursor: pointer;
+                    padding-top: 9px;
+                    transition-duration: 0.4s;
+                    margin-bottom:8px;
+                }
+        .button1 {
+                    background-color: white; 
+                    color: black; 
+                    border: 2px solid #22932f;
+                }
+        .button1:hover {
+                        background-color: #4CAF50;
+                        color: white;
+                        }
+        .button2:hover {
+                        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+                        }
+        .buttonred {
+                    background-color: #e61a0f; 
+                    border: none;
+                    color: white;
+                    text-align: center;
+                    border-radius: 10px;
+                    width: 140px;
+                    height: 35px;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    padding-top: 9px;
+                    transition-duration: 0.4s;
+                    margin-bottom:8px;
+                }
+        .button1red {
+                        background-color: white; 
+                        color: black; 
+                        border: 2px solid #ef4907;
+                    }
+    .button1red:hover {
+                        background-color: #e0430f;
+                        color: white;
+                    }
+    .button2red:hover {
+                        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+                    }
+                               
+                    .tble {
+            color: rgb(255, 255, 255);
+            font-weight: bolder;
+            font-size: 18px;
+            background-color: rgb(6, 4, 78);
+            border-collapse: collapse;
+        }
+        td, th {
+                height: 50px;
+                width: 100px;
+  
+                }
+        tr:nth-child(even):not(:first-child) {
+                    background-color: #cadfef;
+                    }
+
+        tr:nth-child(odd):not(:first-child) {
+                    background-color: #a4cef0;
+                    }
+</style>
+
+</head>
+<body><br>
+    <center><h2>Accepted Mechanic Requests</h2></center><br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <br>
+        <br>
+        <table  align="center"  width="85%" style='font-family:"times new roman", Courier, monospace; width: 98%;'>
+            <tr align="center" class="tble">
+                <th> Reg.No </th>
+                <th> Mechanic Name  </th>
+                <th> Email-id </th>
+                <th> Contact </th>
+                <th> Licence Proof </th>
+                <th> Action </th>
+            </tr>
+            {% for i in data %}
+            <tr align="center" class="tble1" >
+                <td>{{forloop.counter}}</td>
+                <td>{{i.mech_name}}</td>
+                <td>{{i.mech_email}}</td>
+                <td>{{i.mech_contact}}</td>
+                <td cellpadding="5"><img src="{{i.mech_certificate.url}}" alt="img" width="200px" height="130px" class=" home4"></td>
+                <td><a href="{% url 'projectadmin:rejectmwech' i.id %}"class="buttonred button2red button1red"> Reject </a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+<br><br><br><br><br><br>
+{% endblock content %}

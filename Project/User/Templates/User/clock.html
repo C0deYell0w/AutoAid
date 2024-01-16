@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Digital+7&display=swap">
+	<title>Analog Clock</title>
+	<style type="text/css">
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-family: 'digital-7';
+  background-color: black;
+  color: #00ff00;
+}
+
+.digits {
+  font-size: 5em;
+  transition: transform 0.5s ease-in-out;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.clock:hover .digits {
+  transform: scale(1.2);
+  color: #ff0000;
+}
+	</style>
+</head>
+<body>
+    <table border="9" align="center" cellpadding="25">
+        <tr>
+            <td>
+            	<div class="clock">
+                    <div class="digits"></div>
+                  </div>
+            </td>
+        </tr>
+	</div>
+    </table>
+
+	<script>
+		function updateTime() {
+  var now = new Date();
+  var hours = now.getHours().toString().padStart(2, '0');
+  var minutes = now.getMinutes().toString().padStart(2, '0');
+  var seconds = now.getSeconds().toString().padStart(2, '0');
+  var timeString = hours + ':' + minutes + ':' + seconds;
+  document.querySelector('.digits').textContent = timeString;
+}
+
+setInterval(updateTime, 1000);
+	</script>
+</body>
+</html>

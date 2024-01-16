@@ -1,0 +1,91 @@
+{% extends 'Mfb/Head2.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .tble {
+        color: rgb(2, 2, 2);
+        font-weight: bold;
+        font-size: 12px;
+        border-radius: 12px;
+        width: 30%;
+        opacity: 95%;
+
+        background-color: rgb(166, 210, 251);
+    }
+    td {
+        margin: 20px;
+  padding: 10px;
+}
+tr {
+        margin: 20px;
+  padding: 10px;
+}
+.clrs {
+    font-size: 14px;
+}
+    </style>
+</head>
+<body background="{% static 'Main/img/carousel-bg-2.png' %}">
+    {% csrf_token %}
+    <form>
+        <table class="tble" cellpadiing="2" align="center">
+            <tr><td><h4><center>Your Profile</center></h4></td></tr>
+            <tr>&nbsp;</tr>
+            <tr>
+                <td> Name : </td>
+                <td class="clrs">{{mfb.mfb_name}}</td>
+            </tr>
+            <tr>
+                <td> Contact : </td>
+                <td class="clrs">{{mfb.mfb_contact}}</td>
+            </tr>
+            <tr>
+                <td> E-mail : </td>
+                <td class="clrs">{{mfb.mfb_email}}</td>
+            </tr>
+            <tr>
+                <td> Address : </td>
+                <td class="clrs">{{mfb.mfb_address}}</td>
+            </tr>
+            <tr>
+                <td> Licence : </td>
+                <td align="right" colspan="2"><img src="{{mfb.mfb_liscence.url}}" alt="img" width="270px" height="200px"></td>
+            </tr>
+            <tr>
+                <td> State : </td>
+                <td class="clrs"> {{mfb.localplace.place.district.state}}</td>
+            </tr>
+            <tr>
+                <td> District : </td>
+                <td class="clrs">{{mfb.localplace.place.district}}</td>
+            </tr>
+            <tr>
+                <td> Place : </td>
+                <td class="clrs">{{mfb.localplace.place}}</td>
+            </tr>
+            <tr>
+                <td> Local-Place : </td>
+                <td class="clrs"> {{mfb.localplace}}</td>
+            </tr>
+            <tr>
+                <td> Date of join : </td>
+                <td class="clrs">{{mfb.doj}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url 'Mfb:editmfbprofile' mfb.id %}">Edit-Profile</a>||
+                    <a href="{% url 'Mfb:changemfbpswd' mfb.id %}">Change-Password</a>
+                </td>
+            </tr>  
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

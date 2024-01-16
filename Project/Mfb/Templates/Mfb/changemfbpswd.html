@@ -1,0 +1,61 @@
+{% extends 'Mfb/Head2.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tble {
+        color: rgb(2, 2, 2);
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 12px;
+        width: 35%;
+            opacity: 90%;
+        background-color: rgb(166, 210, 251);
+    }
+    .errr{
+        color: rgb(253, 253, 253);
+        font-weight: bolder;
+        font-size: 21px;
+    }
+    </style>
+</head>
+<body  background="{% static 'Main/img/carousel-bg-2.png' %}">
+    <form action="" method="post">
+        {% csrf_token %}
+        <br>
+        <table align="center"  cellpadding="15"  class="tble" >
+            <tr><td colspan="2"><h4><center>Change Account Password</center></h4></td></tr>
+            <tr>&nbsp;</tr>
+            <tr>
+            <tr>
+                <td>Current Password : </td>
+                <td><input type="password" name="cpswd" size="35px" id=""></td>
+            </tr>
+            <tr>
+                <td> New Password : </td>
+                <td><input type="password" name="npswd" size="35px" id=""></td>
+            </tr>
+            <tr>
+                <td> Confirm Password : </td>
+                <td><input type="password" name="" size="35px" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="5" align="center">
+                    <input type="submit" value="Reset">
+                    <input type="reset" value="Cancel">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <center><h3 class="errr">{{ER}}</h3></center> 
+    </form>
+    <br><br><br><br><br><br>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,30 @@
+from django.urls import path
+from User import views
+app_name="User"
+urlpatterns = [
+    path('usrhomepage/',views.usrhomepage,name="usrhomepage"),
+    path('usrprofile/',views.usrprofile,name="usrprofile"),
+    path('editusrprofile/<int:usrid>',views.editusrprofile,name="editusrprofile"),
+    path('changeusrpswd/<int:usrid>',views.changeusrpswd,name="changeusrpswd"),
+    path('searchmechanic/',views.searchmechanic,name="searchmechanic"),
+    path('searchmfb/',views.searchmfb,name="searchmfb"),
+    path('ajaxmech/',views.Ajaxmech,name="Ajax-mech"),
+    path('ajaxmfb/',views.Ajaxmfb,name="Ajax-mfb"),
+    path('repairscheduling/<int:mid>',views.repairscheduling,name="repairscheduling"),
+    path('ajaxbrand/',views.Ajaxbrand,name="Ajax-vehbrand"),
+    path('mfbscheduling/<int:mfbid>',views.mfbscheduling,name="mfbscheduling"),
+    path('paymentpage/<int:bookid>',views.paymentpage,name="paymentpage"),
+    path('processingpayment/',views.processingpayment,name="processingpayment"),
+    path('paymentsuccessful/',views.paymentsuccessful,name="paymentsuccessful"),
+    path('mfbbookingstatus/',views.mfbbookingstatus,name="mfbbookingstatus"),
+    path('mechbookingstatus/',views.mechbookingstatus,name="mechbookingstatus"),
+    path('mechpayment/<int:bookingid>',views.mechpayment,name="mechpayment"),
+    path('mechprocessingpayment/',views.mechprocessingpayment,name="mechprocessingpayment"),
+    path('mechpaymentsuccessful/',views.mechpaymentsuccessful,name="mechpaymentsuccessful"),
+    path('complaint/',views.complaint,name="complaint"),
+    path('feedback/',views.feedback,name="feedback"),
+    path('viewresponse/',views.viewresponse,name="viewresponse"),
+    path('starrating/',views.starrating,name="starrating"),
+    path('logout/',views.logout,name="logout"),
+    path('clock/',views.clock,name="clock"),
+]

@@ -1,0 +1,326 @@
+{% extends 'Guest/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wernnn{
+        font-size: 21px;
+        font-weight: bold;
+        color: rgb(241, 16, 16);
+        position: absolute;
+    }
+    body {
+position: relative;
+background-image: url('{% static 'Main/img/mech.jpg' %}');
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+body::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Change the opacity value as desired */
+        z-index: -1;
+    }
+    .tble {
+color: rgb(255, 255, 255);
+font-weight: bolder;
+font-size: 18px;
+background-color: rgb(6, 4, 78);
+border-collapse: collapse;}
+.tble1 {
+color: rgb(0, 0, 0);
+font-weight: bold;
+font-size: 18px;
+border-collapse: collapse;
+}
+td, th {
+height: 50px;
+width: 100px;
+
+}
+tr:nth-child(even):not(:first-child) {
+ background-color: #f5de8a;
+ }
+
+tr:nth-child(odd):not(:first-child) {
+ background-color: #f5de8a;
+ }
+ table{
+    opacity: 85%;
+ }
+
+ .button {
+                    background-color: #4CAF50; 
+                    border: none;
+                    color: white;
+                    text-align: center;
+                    border-radius: 10px;
+                    width: 140px;
+                    height: 45px;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    margin: 2px 2px;
+                    cursor: pointer;
+                    padding-top: 9px;
+                    transition-duration: 0.4s;
+                    margin-bottom:12px;
+                }
+        .button1 {
+                    background-color: white; 
+                    color: black; 
+                    border: 2px solid #22932f;
+                }
+        .button1:hover {
+                        background-color: #4CAF50;
+                        color: white;
+                        }
+        .button2:hover {
+                        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+                        }
+</style>
+</head>
+<body>
+    <form action="" method="post" id="MechForm" enctype="multipart/form-data" data-district-url="{% url 'projectadmin:Ajax-place' %}"  data-place-url="{% url 'projectadmin:Ajax-localplace' %}" data-mechplace-url="{% url 'Guest:Ajax-mechplace' %}">
+        {% csrf_token %}
+        <br>
+        <br>
+    
+        <table border="9" align="center" width="45%" >
+            <tr style="background-color: #f5de8a;">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr style="background-color: #f5de8a;"> <td  align="center" colspan="2"  ><h2 style="color: rgb(0, 0, 0);">Mechanic Registration</h2></td></tr>
+            <tr style="background-color: #f5de8a;">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Name</td>
+                <td><input type="text" name="txtname" required="" autocomplete="off" onchange="nameval(this)">
+                <div id="name"></div></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Contact</td>
+                <td><input type="text" name="txtcontact" minlength="10" maxlength="10" required="" autocomplete="off" onchange="checknum(this)">
+                <div id="contact"></div></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>E-mail</td>
+                <td><input type="email" name="txtemail" id="" required="" autocomplete="off" onchange="emailval(this)">
+                <div id="content"></div></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Address</td>
+                <td><textarea name="txtaddress" id="" cols="20" rows="5" required="" autocomplete="off" ></textarea></td>
+            </tr>
+            
+            <tr class="tble1"align="center" >
+                <td>State</td>
+                <td><select name="statedrop" id="statedrop" required="">
+                    <option value=""> -SELECT- </option>
+                    {% for i in state %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>District</td>
+                <td><select name="distdrop" id="distdrop" required="">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Place</td>
+                <td><select name="selplace" id="selplace" required="">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Local-Place</td>
+                <td><select name="localplace" id="localplace" required="">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>License-Certificate</td>
+                <td><input type="file" name="photo1" id="" required="" autocomplete="off"></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Password</td>
+                <td><input type="password" name="pswd" id="" required="" autocomplete="off"></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td>Confirm Password</td>
+                <td><input type="password" name="cpswd" id="" required="" autocomplete="off" onchange="chkpwd(this,pswd)">
+                    <div id="pass"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td><br></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td colspan="2"> <input type="checkbox" name="chk" id="chk">    I Agree all the <a href="{% url 'Guest:mechtermsandconditions' %}">Terms & Conditions</a> and is obligated to follow them</td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td><br></td>
+            </tr>
+            <tr class="tble1"align="center">
+                <td colspan="2" align="center">
+                    <input type="submit" name="btns" id="sbmit" value=" Register " class="button button1 button2">
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td><br></td>
+            </tr>
+        </table>
+       
+    </form>
+    <br><br><br><br><br><br><br><br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script> 
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.querySelector('#chk');
+        const submitButton = document.querySelector('#sbmit');
+
+        // hide the submit button by default
+        submitButton.style.display = 'none';
+
+        // show the submit button when the checkbox is ticked
+        checkbox.addEventListener('change', function() {
+            if (checkbox.checked) {
+                submitButton.style.display = 'block';
+            } else {
+                submitButton.style.display = 'none';
+            }
+        });
+    });
+    </script>
+<script>
+    $("#statedrop").change(function () {
+        var did = $(this).val();
+        var ur = $("#MechForm").attr("data-district-url");
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#distdrop").html(data);
+            },
+        });
+    });
+    $("#distdrop").change(function () {
+        var did = $(this).val();
+        var ur = $("#MechForm").attr("data-place-url");
+        $.ajax({
+            url: ur,
+            data: { isdd: did, },
+            success: function (data) {
+                $("#selplace").html(data);
+            },
+        });
+    });
+    $("#selplace").change(function () {
+        var did = $(this).val();
+        var ur = $("#MechForm").attr("data-mechplace-url");
+        $.ajax({
+            url: ur,
+            data: { lpdd: did, },
+            success: function (data) {
+                $("#localplace").html(data);
+            },
+        });
+    });
+
+
+
+    function chkpwd(txtrp, txtp)
+{
+	if((txtrp.value)!=(txtp.value))
+	{
+		document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+	}
+}
+
+function checknum(elem)
+{
+	var numericExpression = /^[0-9]{8,10}$/;
+	if(elem.value.match(numericExpression))
+	{
+		document.getElementById("contact").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		document.getElementById("contact").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+
+
+
+function emailval(elem)
+{
+	var emailexp=/^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("content").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("content").innerHTML ="<span style='color: red;'>Check Email Address Entered</span>";;
+		elem.focus();
+		return false;
+	}
+}
+function nameval(elem)
+{
+	var emailexp=/^([A-Za-z ]*)$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("name").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+$(document).ready(function(){
+    $('#chk').click(function(){
+        if($(this).is(':checked')){
+            $('input[type="submit"]').removeAttr('disabled');
+        } else {
+            $('input[type="submit"]').attr('disabled','disabled');
+        }
+    });
+});
+</script>
+</body>
+</html>
+{% endblock content %}

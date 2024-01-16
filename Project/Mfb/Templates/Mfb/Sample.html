@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+
+        .button {
+        border: none;
+        color: white;
+        text-align: center;
+        border-radius: 12px;
+        width: 200px;
+        height: 40px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 22px;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        margin-bottom:15px;
+}
+        .button1 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #22932f;
+        }
+        .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+        }
+        .button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+}
+    </style>
+</head>
+<body>
+    <center><h2>WELCOME {{mech.mech_name}}</h2></center>
+    <a href="{% url 'Mechanic:mechprofile' %}" class="button button1 button2" style="text-align: center; ">MyProfile</a><br>
+    <a href="{% url 'Mechanic:bookings' %}"class="button2 button1 button">View bookings</a><br>
+    <a href="{% url 'Mechanic:paidbookings' %}"class="button2 button1 button">View Paid</a><br>
+    <a href="{% url 'Mechanic:logout' %}"><button class="button button2 button1 ">Log-Out</button></a><br>
+</body>
+</html>
+<a href="{% url 'Mechanic:Acceptedbookings' %}"><button class="button button2 button1">View Accepted Bookings</button></a>
+    <br>
+    <a href="{% url 'Mechanic:Rejectedbookings' %}"><button class="button button2 button1">View Rejected Bookings</button></a>
+    <br> 

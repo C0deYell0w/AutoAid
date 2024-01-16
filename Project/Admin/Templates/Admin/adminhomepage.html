@@ -1,0 +1,213 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12 col-xl-6 grid-margin stretch-card">
+    <div class="row w-100 flex-grow">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title">Website Audience Metrics</p>
+            <p class="text-muted">25% more traffic than previous week</p>
+            <div class="row mb-3">
+              <div class="col-md-7">
+                <div class="d-flex justify-content-between traffic-status">
+                  <div class="item">
+                    <p class="mb-">Total Users</p>
+                    <h5 class="font-weight-bold mb-0">{{usrcount}}</h5>
+                    <div class="color-border"></div>
+                  </div>
+                  <div class="item">
+                    <p class="mb-">Completed Bookings</p>
+                    <h5 class="font-weight-bold mb-0">{{bookingscount}}</h5>
+                    <div class="color-border"></div>
+                  </div>
+                  <div class="item">
+                    <p class="mb-">Completed Orders</p>
+                    <h5 class="font-weight-bold mb-0">{{ordercount}}</h5>
+                    <div class="color-border"></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <canvas id="audience-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  <div class="col-12 col-xl-6 grid-margin stretch-card">
+    <div class="row w-100 flex-grow">
+     
+      
+      <div class="col-md-12 stretch-card">
+        <div class="card">
+          <div class="card-body pb-0">
+            <p class="card-title">Server Status 24/7</p>
+            <div class="d-flex justify-content-between flex-wrap">
+              <p class="text-muted">Last update: 2 Hours ago</p>
+              <div class="d-flex align-items-center flex-wrap server-status-legend mt-3 mb-3 mb-md-0">
+                <div class="item mr-3">
+                  <div class="d-flex align-items-center">
+                    <div class="color-bullet"></div>
+                    <h5 class="font-weight-bold mb-0">128GB</h5>
+                  </div>
+                  <p class="mb-">Total Usage</p>
+                </div>
+                <div class="item mr-3">
+                  <div class="d-flex align-items-center">
+                    <div class="color-bullet"></div>
+                    <h5 class="font-weight-bold mb-0">92%</h5>
+                  </div>
+                  <p class="mb-">Memory Usage</p>
+                </div>
+                <div class="item mr-3">
+                  <div class="d-flex align-items-center">
+                    <div class="color-bullet"></div>
+                    <h5 class="font-weight-bold mb-0">16%</h5>
+                  </div>
+                  <p class="mb-">Disk Usage</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <canvas height="170" id="status-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h2 > Payment Summary</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr> <td> <h4> MECHANICS </h4></td></tr>
+              <tr>
+                <th>
+                 <b>User</b> 
+                </th>
+                <th>
+                  <b>Name</b> 
+                </th>
+                <th>
+                  <b>Progress</b> 
+                </th>
+                <th>
+                  <b>Amount</b> 
+                  
+                </th>
+                <th>
+                  <b>Date And Time</b> 
+                  
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              {% for i in data %}
+              <tr>
+                <td class="py-1">
+                  <img src="{{i.uid.usr_photo.url}}"  alt="imsge"/>
+                </td>
+                <td>
+                  {{i.uid.usr_name}}
+                </td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+                <td>
+                    ₹ 30 /-
+                </td>
+                <td>
+                  {{i.dt_of_booking}}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tr> <td> <h4> FUEL BUNKS </h4></td></tr>
+            <tbody>
+              {% for i in data2 %}
+              <tr>
+                <td class="py-1">
+                  <img src="{{i.usrid.usr_photo.url}}"  alt="imsge"/>
+                </td>
+                <td>
+                  {{i.usrid.usr_name}}
+                </td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+                <td>
+                    ₹ 15 /-
+                </td>
+                <td>
+                  {{i.dt_of_booking}}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row end -->
+<div class="row">
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card bg-facebook d-flex align-items-center">
+      <div class="card-body py-5">
+        <div
+          class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+          <i class="mdi mdi-facebook text-white icon-lg"></i>
+          <div class="ml-3 ml-md-0 ml-xl-3">
+            <h5 class="text-white font-weight-bold">2.62 Subscribers</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card bg-google d-flex align-items-center">
+      <div class="card-body py-5">
+        <div
+          class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+          <i class="mdi mdi-google-plus text-white icon-lg"></i>
+          <div class="ml-3 ml-md-0 ml-xl-3">
+            <h5 class="text-white font-weight-bold">3.4k Followers</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card bg-twitter d-flex align-items-center">
+      <div class="card-body py-5">
+        <div
+          class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+          <i class="mdi mdi-twitter text-white icon-lg"></i>
+          <div class="ml-3 ml-md-0 ml-xl-3">
+            <h5 class="text-white font-weight-bold">3k followers</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row end -->
+
+
+{% endblock content %}

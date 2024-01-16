@@ -1,0 +1,130 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tble {
+ color: rgb(255, 255, 255);
+ font-weight: bolder;
+ font-size: 18px;
+ background-color: rgb(6, 4, 78);
+ border-collapse: collapse;}
+.tble1 {
+color: rgb(0, 0, 0);
+font-weight: bold;
+font-size: 18px;
+border-collapse: collapse;
+}
+td, th {
+ height: 50px;
+ width: 100px;
+
+ }
+tr:nth-child(even):not(:first-child) {
+     background-color: #cadfef;
+     }
+
+tr:nth-child(odd):not(:first-child) {
+     background-color: #a4cef0;
+     }
+
+</style>
+</head>
+<body>
+    <form action="" method="post" id="UserForm" enctype="multipart/form-data" data-district-url="{% url 'projectadmin:Ajax-place' %}"  data-place-url="{% url 'projectadmin:Ajax-localplace' %}">
+        {% csrf_token %}
+        <table border="3" align="center" cellpadding="15px">
+            <tr class="tble">
+                <td>State</td>
+                <td><select name="statedrop" id="statedrop">
+                    <option value=""> -SELECT- </option>
+                    {% for i in state %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="distdrop" id="distdrop">
+                    <option value=""> -SELECT- </option>
+                 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="placedrop" id="placedrop">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Local Place</td>
+                <td><input type="text" name="txtlocalplace" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btns" value=" SAVE ">
+                    <input type="reset" value=" CANCEL " name="clr">
+                </td>
+            </tr>
+        </table>
+
+
+
+        <br>
+
+
+        <table  align="center" cellpadding="10" width="60%">
+            <tr class="tble">
+                <th> PL.NO </th>
+                <th> Local Place </th>
+                <th> Place </th>
+                <th> Action </th>
+            </tr>
+            {% for i in localplace %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i}}</td>
+                <td>{{i.place}}</td>
+                <td><a href="{% url 'projectadmin:dellocalplace' i.id %}"> Delete </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+     $("#statedrop").change(function () {
+        var did = $(this).val();
+        var ur = $("#UserForm").attr("data-district-url");
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#distdrop").html(data);
+            },   
+        });  
+    });
+     $("#distdrop").change(function () {
+        var did = $(this).val();
+        var ur = $("#UserForm").attr("data-place-url");
+        $.ajax({
+            url: ur,
+            data: { isdd: did, },
+            success: function (data) {
+                $("#placedrop").html(data);
+            },
+        });
+    });
+   
+</script>
+</body>
+</html>
+{% endblock content %}

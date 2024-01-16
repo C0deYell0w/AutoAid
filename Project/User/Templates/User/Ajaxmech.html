@@ -1,0 +1,55 @@
+<style>
+    .button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    width: 140px;
+    height: 40px;
+    padding-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-bottom:15px;
+}
+    .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #22932f;
+    }
+    .button1:hover {
+    background-color: #4CAF50;
+    color: white;
+    }
+    .button2:hover {
+box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+}
+</style>
+<table align="center" cellpadding="50" style="border-collapse: collapse">
+    <tr>
+        {% for i in data %}
+
+        <td>
+            <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+                {% load static %}
+                <p><img src="{% static 'SearchImage/MechanicPS2.jpg' %}" width="100px" height="100px" style="border-radius: 50px;"></p>
+                <p>{{i.mech_name}}</p>
+                <p>{{i.mech_contact}}</p>
+                <p>{{i.mech_email}}</p>
+                <p>{{i.mech_address}}</p>
+                <br>
+                <a href="{% url 'User:repairscheduling' i.id %}" class="button button2 button1">Select-Mechanic</a>
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}
+    </tr>
+    <tr>
+        {% endif %}
+
+
+        {% endfor %}
+</table>

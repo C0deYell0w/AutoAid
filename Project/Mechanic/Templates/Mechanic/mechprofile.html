@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% csrf_token %}
+    <form>
+        <table border="2" cellpadiing="2" align="center">
+            <tr>
+                <td> Name : </td>
+                <td>{{mech.mech_name}}</td>
+            </tr>
+            <tr>
+                <td> Contact : </td>
+                <td>{{mech.mech_contact}}</td>
+            </tr>
+            <tr>
+                <td> E-mail : </td>
+                <td>{{mech.mech_email}}</td>
+            </tr>
+            <tr>
+                <td> Address : </td>
+                <td>{{mech.mech_address}}</td>
+            </tr>
+            <tr>
+                <td> Licence : </td>
+                <td align="right" colspan="2"><img src="{{mech.mech_certificate.url}}" alt="img" width="270px" height="200px" ></td>
+            </tr>
+            <tr>
+                <td> State : </td>
+                <td>{{mech.localplace.place.district.state}}</td>
+            </tr>
+            <tr>
+                <td> District : </td>
+                <td>{{mech.localplace.place.district}}</td>
+            </tr>
+            <tr>
+                <td> Place : </td>
+                <td>{{mech.localplace.place}}</td>
+            </tr>
+            <tr>
+                <td> Local-Place : </td>
+                <td>{{mech.localplace}}</td>
+            </tr>
+            <tr>
+                <td> Account Status : </td>
+                <td>{{mech.mech_status}}</td>
+            </tr>
+            <tr>
+                <td> Date of join : </td>
+                <td>{{mech.doj}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url 'Mechanic:editmechprofile' mech.id %}">Edit-Profile</a>||
+                    <a href="{% url 'Mechanic:changemechpswd' mech.id %}">Change-Password</a>
+                </td>
+            </tr>    
+        </table>
+    </form>
+</body>
+</html>

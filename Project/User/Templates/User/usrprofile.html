@@ -1,0 +1,147 @@
+{% extends 'User/Head2.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            width: 140px;
+            height: 40px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            padding-top: 7px;
+            padding-bottom: 6px;
+            transition-duration: 0.4s;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #22932f;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button2:hover {
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+        }
+
+
+
+
+        .profileTable {
+            background-color: rgb(187, 222, 244);
+            opacity: 85%;
+            border-radius: 12px;
+            margin: 0;
+            width: 25%;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 10px;
+            font-size: 18px;
+            font-weight: bold;
+
+        }
+        
+    </style>
+
+</head>
+
+<body background="{% static 'Main/img/carousel-bg-2.png' %}">
+    <br><br>
+    {% csrf_token %}
+
+    <form>
+        <table align="center" class="profileTable" >
+            <tr>
+                <td>
+                    <h3>
+                        <center>User Profile</center>
+                    </h3>
+                </td>
+            </tr>
+            <tr>&nbsp;</tr>
+            <tr>
+                <td align="center" colspan="2"><img src="{{user.usr_photo.url}}" alt="img" width="120px" height="120px"
+                        style="border-radius: 80px;"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td> Name : </td>
+                <td>{{user.usr_name}}</td>
+            </tr>
+            <tr>
+                <td> Contact : </td>
+                <td>{{user.usr_contact}}</td>
+            </tr>
+            <tr>
+                <td> E-mail : </td>
+                <td>{{user.usr_email}}</td>
+            </tr>
+            <tr>
+                <td> Address : </td>
+                <td>{{user.usr_address}}</td>
+            </tr>
+            <tr>
+                <td> Gender : </td>
+                <td>{{user.usr_gender}}</td>
+            </tr>
+            <tr>
+                <td> State : </td>
+                <td>{{user.localplace.place.district.state}}</td>
+            </tr>
+            <tr>
+                <td> District : </td>
+                <td>{{user.localplace.place.district}}</td>
+            </tr>
+            <tr>
+                <td> Place : </td>
+                <td>{{user.localplace.place}}</td>
+
+            </tr>
+            <tr>
+                <td> Local-Place : </td>
+                <td>{{user.localplace}}</td>
+            </tr>
+            <tr>
+                <td> D.O.B :</td>
+                <td>{{user.usr_dob}}</td>
+            </tr>
+            <tr>
+                <td> Date of join : </td>
+                <td>{{user.doj}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url 'User:editusrprofile' user.id %}" class="button button2 button1 ">Edit-Profile</a>
+                    <a href="{% url 'User:changeusrpswd' user.id %}" class="button button2 button1 ">Change-Password</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
+{% endblock content %}

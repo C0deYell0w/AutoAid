@@ -1,0 +1,116 @@
+{% extends 'User/Head2.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>    
+* {    
+  box-sizing: border-box;    
+}    
+    
+input[type=text], select, textarea {    
+  width: 100%;    
+  padding: 12px;    
+  border: 1px solid rgb(70, 68, 68);    
+  border-radius: 4px;    
+  resize: vertical;    
+}    
+    
+label {    
+  padding: 12px 12px 12px 0;    
+  display: inline-block;    
+}    
+    
+input[type=submit] {    
+  background-color: rgb(37, 116, 161);    
+  color: white;    
+  padding: 12px 20px;    
+  border: none;    
+  border-radius: 4px;    
+  cursor: pointer;    
+  float: right;    
+}  
+input[type=reset] {    
+  background-color: rgb(37, 116, 161);    
+  color: white;    
+  padding: 12px 20px;    
+  border: none;    
+  margin-right: 4px;
+  border-radius: 4px;    
+  cursor: pointer;    
+  float: right;    
+}     
+input[type=reset]:hover {    
+  background-color: #df4b19;    
+}  
+    
+input[type=submit]:hover {    
+  background-color: #45a049;    
+}    
+    
+.cont {    
+  border-radius: 12px;   
+  margin-left: 25%; 
+  width: 800px;
+  height: auto;
+  background-color: #b0cbdb;    
+  padding: 20px;    
+  text-align: center;  
+  opacity: 80%;
+}    
+    
+.col-25 {    
+  float: left;    
+  width: 25%;    
+  margin-top: 6px;
+}    
+    
+.col-75 {    
+  float: left;    
+  width: 75%;    
+  margin-top: 6px;    
+}    
+    
+   
+.rog:after {    
+  content: "";    
+  display: table;    
+  clear: both;    
+}    
+</style> 
+
+</head>  
+
+<body align="center"  background="{% static 'Main/img/camaro.jpg' %}">  
+  <br><br>  
+<h2 style="color: aliceblue;">LEAVE A FEEDBACK</h2>    
+<br>
+    <div class="cont" align="center">    
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="rog">    
+                <div class="col-25">    
+                    <label for="feed_back" style="font-weight: bold;">Feed Back</label>    
+                </div>    
+                <div class="col-75">    
+                    <textarea  name="txtfeed" placeholder="Write something.." style="height:200px"></textarea>    
+                </div>  
+            </div>  
+       
+            <div class="rog">    
+                 <input type="submit" value="Submit" >
+                    <div class="rog"> 
+                            <input type="reset" value="Clear"> 
+                    </div>    
+            </div>   
+          </div> 
+        </form>    
+        <br><br><br><br><br><br><br><br><br>
+</body>    
+</html>
+{% endblock content %}

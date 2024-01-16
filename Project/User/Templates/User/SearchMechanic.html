@@ -1,0 +1,191 @@
+{% extends 'User/Head2.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .button {
+        background-color: #4CAF50; 
+        border: none;
+        color: white;
+        text-align: center;
+        border-radius: 12px;
+        width: 140px;
+        height: 50px;
+        padding-top: 13px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        margin-bottom:15px;
+}
+        .button1 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #22932f;
+        }
+        .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+        }
+        .button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.449), 0 17px 50px 0 rgba(0, 0, 0, 0.375);
+}
+    </style>
+
+</head>
+<body>
+    <center><p><h3>Select Mechanics From Your Local-Place</h3></p></center>
+    <form action="" method="post"  id="MechForm" data-district-url="{% url 'projectadmin:Ajax-place' %}"  data-place-url="{% url 'projectadmin:Ajax-localplace' %}" data-mechplace-url="{% url 'Guest:Ajax-mechplace' %}" data-mechanic-url="{% url 'User:Ajax-mech' %}">
+        {% csrf_token %}
+        <table border="2" align="center" cellpadding="5">
+            <tr colspan="2">
+                <td>State</td>
+                <td><select name="statedrop" id="statedrop">
+                    <option value=""> -SELECT- </option>
+                    {% for i in state %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            
+                <td>District</td>
+                <td><select name="distdrop" id="distdrop">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+           
+                <td>Place</td>
+                <td><select name="selplace" id="selplace">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+           
+                <td>Local-Place</td>
+                <td><select name="localplace" id="localplace">
+                    <option value=""> -SELECT- </option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+        </table>
+        <br>
+       
+        <table align="center" cellpadding="50" style="border-collapse: collapse" id="result">
+            <tr>
+                {% for i in mech %}
+
+                <td>
+                    <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+                        {% load static %}
+                        <p><img src="{% static 'SearchImage/MechanicPS2.jpg' %}" width="100px" height="100px" style="border-radius: 50px;"></p>
+                        <p>{{i.mech_name}}</p>
+                        <p>{{i.mech_contact}}</p>
+                        <p>{{i.mech_email}}</p>
+                        <p>{{i.mech_address}}</p>
+                        <a href="{% url 'User:repairscheduling' i.id %}" class="button button2 button1">Select-Mechanic</a>
+                    </div>
+                </td>
+                {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                {% endif %}
+
+
+                {% endfor %}
+        </table>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#statedrop").change(function () {
+        var sid = $(this).val();
+        var did=document.getElementById("distdrop").value;
+        var pid=document.getElementById("selplace").value;
+        var lpid=document.getElementById("localplace").value;
+        var ur = $("#MechForm").attr("data-district-url");
+        $.ajax({
+            url: ur,
+            data: { disd: sid, },
+            success: function (data) {
+                $("#distdrop").html(data);
+                var ur = $("#MechForm").attr("data-mechanic-url");
+        $.ajax({
+            url: ur,
+            data: { sid:sid,did:did,pid:pid,lpid:lpid, },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+            },
+        });
+    });
+    $("#distdrop").change(function () {
+        var did = $(this).val();
+        var sid=document.getElementById("statedrop").value;
+        var pid=document.getElementById("selplace").value;
+        var lpid=document.getElementById("localplace").value;;
+        var ur = $("#MechForm").attr("data-place-url");
+        $.ajax({
+            url: ur,
+            data: { isdd: did, },
+            success: function (data) {
+                $("#selplace").html(data);
+                var ur = $("#MechForm").attr("data-mechanic-url");
+        $.ajax({
+            url: ur,
+            data: {sid:sid,did:did,pid:pid,lpid:lpid, },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+            },
+        });
+    });
+    $("#selplace").change(function () {
+        var pid = $(this).val();
+        var did=document.getElementById("distdrop").value;
+        var sid=document.getElementById("statedrop").value;
+        var lpid=document.getElementById("localplace").value;
+        var ur = $("#MechForm").attr("data-mechplace-url");
+        $.ajax({
+            url: ur,
+            data: { lpdd: pid, },
+            success: function (data) {
+                $("#localplace").html(data);
+                var ur = $("#MechForm").attr("data-mechanic-url");
+        $.ajax({
+            url: ur,
+            data: { sid:sid,did:did,pid:pid,lpid:lpid, },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+            },
+        });
+    });
+    $("#localplace").change(function () {
+        var lpid = $(this).val();
+        var did=document.getElementById("distdrop").value;
+        var pid=document.getElementById("selplace").value;
+        var sid=document.getElementById("statedrop").value;
+        var ur = $("#MechForm").attr("data-mechanic-url");
+        $.ajax({
+            url: ur,
+            data: { sid:sid,did:did,pid:pid,lpid:lpid, },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    });
+</script>
+</body>
+</html>
+ {% endblock content %}
+    
